@@ -1,23 +1,16 @@
-import { Button, Table, Modal, Form } from "antd";
+import {  Modal, Form } from "antd";
 import { useState } from "react";
 import UserForm from "../components/form"; 
+import { userDataType } from "../types";
+import UsersTable from "../components/usersTable";
 
-type UsersData = {
-  key: number;
-  name: string;
-  workLocation: string;
-}[];
 
-const usersData: UsersData = [
+const usersData: userDataType[] = [
   { key: 1, name: "mohamed", workLocation: "Home" },
   { key: 2, name: "mostafa", workLocation: "Home" },
 ];
 
-type userDataType = {
-  key?: number;
-  name: string;
-  workLocation: string;
-};
+
 
 const Users = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,25 +54,6 @@ const Users = () => {
     setIsEditing(false);
   };
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Work Location",
-      dataIndex: "workLocation",
-      key: "workLocation",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (_: any, record: userDataType) => (
-        <Button onClick={() => editUserData(record)}>Edit</Button>
-      ),
-    },
-  ];
 
   return (
     <div>
@@ -96,13 +70,7 @@ const Users = () => {
           userData={userData}
         />
       </Modal>
-
-      <div className="header flex justify-between items-center mb-5">
-        <h1>Users Table</h1>
-        <Button onClick={showModal}>Add</Button>
-      </div>
-
-      <Table dataSource={users} columns={columns} rowKey="key" />
+      <UsersTable showModal={showModal} editUserData={editUserData} users={users}/>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Form, Input, Select } from "antd";
+import { Form, FormInstance, Input, Select } from "antd";
 import React from "react";
 
 type Inputs = {
@@ -8,7 +8,7 @@ type Inputs = {
 };
 
 type FormProps = {
-  form: any;
+  form: FormInstance;
   userData: Inputs|undefined;
   onFinish: (values: Inputs) => void;
 };
